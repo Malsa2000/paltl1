@@ -9,8 +9,6 @@ class Problem{
   //late  String image ;
   late int userId;
 
-
-
   Problem();
   Problem.fromMap(Map<String, dynamic> rowMap) {
     this.id = rowMap['id'];

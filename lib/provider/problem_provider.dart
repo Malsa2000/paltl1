@@ -23,6 +23,13 @@ class ProblemProvider extends ChangeNotifier{
     Problems = await _dbController.read();
     notifyListeners();
   }
+
+void readState(String state)async{
+  Problems = await _dbController.readState(state);
+  notifyListeners();
+}
+
+
   Future<ProcessResponse> update(Problem problem) async {
     bool updated = await _dbController.update(problem);
     if(updated) {

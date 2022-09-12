@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:paltl/helper_classs.dart';
 
-import '../models/city.dart';
+import '../models/state.dart';
 class ProblemDetails extends StatefulWidget {
   const ProblemDetails({Key? key}) : super(key: key);
 
@@ -15,9 +15,11 @@ class _ProblemDetailsState extends State<ProblemDetails> {
 
   int? _id ;
   List<ReportState> _dropMenu = <ReportState>[
-    ReportState(id: 1, title: "on-Going"),
-    ReportState(id: 2, title: "Falsh report"),
-    ReportState(id: 3, title: "Review"),
+    ReportState(id: 1, title: "on-Going" ,color :(0xFFE3F1FF)),
+    ReportState(id: 2, title: "Falsh report" ,color :(0xFFFFF6DB)),
+    ReportState(id: 3, title: "Review" ,color :(0xFFFFD9D9)),
+    ReportState(id: 4, title: "Report" ,color :(0xFFDDFFE2)),
+
   ];
 
   @override

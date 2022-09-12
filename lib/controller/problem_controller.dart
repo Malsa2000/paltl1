@@ -35,6 +35,10 @@ class ProblemsDbController{
     return countOfUpdatedRows == 1;
   }
 
-
+Future<List<Problem>> readState(String State) async{
+  List<Map<String, dynamic>> rowsMap = await database.query(Problem.tableName,
+      where: 'state = ?', whereArgs: [State]);
+  return rowsMap.map((rowMap) => Problem.fromMap(rowMap)).toList();
+}
 
 }
