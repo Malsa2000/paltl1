@@ -40,7 +40,7 @@ class DataController {
             'description TEXT NOT NULL,'
             'state REAL NOT NULL,'
             'date REAL NOT NULL,'
-            'city TEXT NOT NULL'
+            'city TEXT NOT NULL,'
             'user_id INTEGER,'
             'FOREIGN KEY (user_id) references users(id)'
             ')');

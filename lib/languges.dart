@@ -7,18 +7,49 @@ class ChangLanguges extends StatelessWidget {
    ChangLanguges({Key? key}) : super(key: key);
 
   bool _select = false;
-   //LocaeController controller = Get.find();
+  LocaeController controller = Get.find();
 
 
    @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("lang".tr),),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 16..w),
-        children: [
+      body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            context.text(text: 'languges'.tr, size: 23, color: context.blackColor ,wieght: FontWeight.w600),
+            SizedBox(height: 5,),
+            context.text(text: 'languges2'.tr, size: 18, color: context.yellowColor ,wieght: FontWeight.w500),
+            SizedBox(height: 40,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image(image: AssetImage("images/paper.png") ,height: 30.h ,width: 50.w,),
+                context.text(text: "اللغة العربية", size: 18, color: context.blackColor ,wieght: FontWeight.w400),
+                SizedBox(width: 20,),
+                ElevatedButton(style: ElevatedButton.styleFrom(primary: Color(context.yellowColor) ,maximumSize: Size(100, 60)),
+                    onPressed: (){
+                      controller.changLanguges("ar");
+                    }, child: Text('1'.tr)),
+              ],),
+            SizedBox(height: 10,),
 
-          // InkWell(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image(image: AssetImage("images/paper.png") ,height: 30.h ,width: 50.w,),
+                context.text(text: "English", size: 18, color: context.blackColor ,wieght: FontWeight.w400),
+                SizedBox(width: 20,),
+                ElevatedButton(style: ElevatedButton.styleFrom(primary: Color(context.yellowColor) ,maximumSize: Size(100, 60)),
+                    onPressed: (){
+                      controller.changLanguges("en");
+                    }, child: Text('2'.tr)),
+
+              ],),
+
+          ],),
+
+           // InkWell(
           //   onTap: (){
           //     controller.changLanguges("en");
           //   },
@@ -68,8 +99,7 @@ class ChangLanguges extends StatelessWidget {
           //     ],),),
           // ),
 
-        ],
-      ),
+
     );
   }
 }

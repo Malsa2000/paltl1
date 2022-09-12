@@ -20,7 +20,7 @@ import 'local/local.dart';
 
 void main()async{
   WidgetsFlutterBinding.ensureInitialized();
-//  await DataController().implementDatabase();
+ await DataController().implementDatabase();
   await SharedPrefController().initPreferences();
   runApp(MyApp());
 }
@@ -35,40 +35,34 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       builder: (context, child) {
-        return MultiProvider(
-          providers: [
-           // ChangeNotifierProvider<ProblemProvider>(create: (context) => ProblemProvider()),
-          ],
-          builder: (context, widget) {
-            return GetMaterialApp(
-              theme: ThemeData(
-                  appBarTheme: AppBarTheme(
-                      centerTitle: true,
-                      backgroundColor:const Color(0xFFFFFFFF) ,
-                      elevation: 0,
-                      titleTextStyle: GoogleFonts.poppins(
-                          fontSize: 18,
-                          color: const Color(0xFF000000),
-                          fontWeight: FontWeight.w500
-                      ))),
-              locale: Get.deviceLocale,
-              translations :MyLocale(),
-              debugShowCheckedModeBanner: false,
-              initialRoute: '/bot',
-              routes: {
-                '/onBording': (context) => const OnBording(),
-                '/LunchScreen': (context) => const LunchScreen(),
-                '/add_problem' :(context) => const AddProblem(),
-                '/bot' :(context) => const NavigatorButtom(),
-                '/problem_detiles' :(context) =>ProblemDeitals(),
-                '/login' :(context) => Login(),
-                '/sign_in' :(context) => SigUp(),
-                '/veryfied_code': (context) => const VerficationCode(),
+        return GetMaterialApp(
+          theme: ThemeData(
+              appBarTheme: AppBarTheme(
+                  centerTitle: true,
+                  backgroundColor:const Color(0xFFFFFFFF) ,
+                  elevation: 0,
+                  titleTextStyle: GoogleFonts.poppins(
+                      fontSize: 18,
+                      color: const Color(0xFF000000),
+                      fontWeight: FontWeight.w500
+                  ))),
+          locale: Get.deviceLocale,
+          translations :MyLocale(),
+          debugShowCheckedModeBanner: false,
+          initialRoute: '/bot',
+          routes: {
+            '/onBording': (context) => const OnBording(),
+            '/LunchScreen': (context) => const LunchScreen(),
+            '/add_problem' :(context) => const AddProblem(),
+            '/bot' :(context) => const NavigatorButtom(),
+            '/problem_detiles' :(context) =>ProblemDeitals(),
+            '/login' :(context) => Login(),
+            '/sign_in' :(context) => SigUp(),
+            '/veryfied_code': (context) => const VerficationCode(),
 
-              },
-            );
           },
         );
+
       },
     );
 

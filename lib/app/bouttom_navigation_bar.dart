@@ -19,7 +19,7 @@ class _NavigatorButtomState extends State<NavigatorButtom> {
     List<BnScreen> _screen = <BnScreen>[
     BnScreen(title: "home".tr, widget: AddProblem()),
      BnScreen(title: "report".tr, widget: Report()),
-     BnScreen(title: "profile".tr, widget: Report()),];
+     BnScreen(title: "profile".tr, widget: ChangLanguges()),];
   int _currentPaeg = 0;
 
   @override

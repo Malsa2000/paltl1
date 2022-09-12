@@ -6,6 +6,7 @@ class Problem{
  late String description;
  late  String state ;
   late  String city ;
+  //late  String image ;
   late int userId;
 
 
@@ -19,6 +20,7 @@ class Problem{
     this.state = rowMap['state'];
     this.userId = rowMap['user_id'];
     this.city = rowMap['city'];
+
   }
 
   Map<String, dynamic> toMap() {

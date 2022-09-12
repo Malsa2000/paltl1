@@ -4,8 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:paltl/helper_classs.dart';
+import 'package:paltl/models/problem.dart';
+import 'package:paltl/prefs/shared_pref_controller.dart';
+import 'package:paltl/process_response.dart';
+import 'package:paltl/provider/problem_provider.dart';
 import 'package:paltl/weidget/button.dart';
 import 'package:paltl/weidget/text_field.dart';
+import 'package:provider/provider.dart';
 class AddProblem extends StatefulWidget {
   const AddProblem({Key? key}) : super(key: key);
 
@@ -25,7 +30,7 @@ class _AddProblemState extends State<AddProblem> {
 
 String? userImage;
 File? _images;
-final picker = ImagePicker();
+final imagePicker = ImagePicker();
 
 
  @override
@@ -78,7 +83,7 @@ final picker = ImagePicker();
             minimumSize: Size(87.w, 80.h),
             primary: Color(0xFFD8D8D8)),
         onPressed: () {
-         getImageFromGallry();
+          showDailalogImage(context);
         },
         child:Icon(Icons.image ,color: Color(context.wihteColor), size: 32,) ),
           SizedBox(height: 16,),
@@ -99,7 +104,6 @@ final picker = ImagePicker();
       ),
     );
   }
-
   void _showList(BuildContext context, String title ,String city ) async{
     await showModalBottomSheet(
         clipBehavior: Clip.antiAlias,
@@ -144,7 +148,10 @@ final picker = ImagePicker();
                               minimumSize: Size(327.w, 48.h),
                               primary: Color(context.blueColor)),
                           onPressed: () {
-                            print("maklsa");
+                            //test
+                            print("malsa");
+
+                         performAddProblem();
                          Navigator.pop(context);
                          showDailalog(context);
                           },
@@ -189,13 +196,98 @@ final picker = ImagePicker();
    ));
    
 }
-  void getImageFromGallry()async{
-   print("malsa");
-   final pickFile = await picker.getImage(source: ImageSource.gallery);
-   if(pickFile != null){
-     setState(()=> _images = File(pickFile.path));
-     print(pickFile.path);
-   }
-   
+ Future showDailalogImage(BuildContext context){
+   return showDialog(context: context, builder: (context)=> AlertDialog(
+     content: Column(
+       mainAxisAlignment: MainAxisAlignment.center,
+       mainAxisSize: MainAxisSize.min,
+       crossAxisAlignment: CrossAxisAlignment.center,
+       children: [
+         context.text(text: "Select", size: 18, color: context.blackColor ,wieght: FontWeight.w400),
+         SizedBox(height: 32.h,),
+         Row(children: [
+           ElevatedButton(
+               style: ElevatedButton.styleFrom(
+                   minimumSize: Size(327.w, 48.h),
+                   primary: Color(context.blueColor)),
+               onPressed: () {
+                 Navigator.pop(context);
+                 getImage( ImageSource.gallery);
+               },
+               child: context.text(
+                   text: "From Galary", size: 14, color: context.wihteColor)),
+           ElevatedButton(
+               style: ElevatedButton.styleFrom(
+                   minimumSize: Size(327.w, 48.h),
+                   primary: Color(context.blueColor)),
+               onPressed: () {
+                 Navigator.pop(context);
+                 getImage( ImageSource.camera);
+               },
+               child: context.text(
+                   text: "From Camera", size: 14, color: context.wihteColor)),
+
+         ],),
+         SizedBox(height: 32.h,),
+
+       ],),
+   ));
+
  }
+
+
+  Future getImage(ImageSource image)async{
+   print("malsa");
+   final imageFile = await imagePicker.getImage(source: image);
+   if(imageFile != null){
+     setState(()=> _images = File(imageFile.path));
+     print(imageFile.path);
+   }
+ }
+
+
+ performAddProblem(){
+   if(checkData()){
+     save();
+   }
+ }
+
+ bool checkData(){
+   if(_descriptionController.text.isNotEmpty && _cityController.text.isNotEmpty && _titleController.text.isNotEmpty
+   ){
+     return true;
+   }
+   context.snackBar(massage: "all fileds is requerd" ,error: true);
+   return false;
+ }
+
+void save(){
+  Provider.of<ProblemProvider>(context, listen: false)
+      .create(problem);
+  context.snackBar(
+      massage: "Add Success!" , error: false);
+}
+
+
+ Problem get problem {
+   Problem problem = Problem();
+   problem.titileProblem = _titleController.text;
+   problem.description = _descriptionController.text;
+   problem.city = _cityController.text;
+   problem.state = 'wating';
+   problem.date = date as String;
+   problem.userId = SharedPrefController().getValueFor<int>(PrefKeys.id.name)!;
+   return problem;
+ }
+
+void clear(){
+  _titleController.clear();
+  _descriptionController.clear();
+  _cityController.clear();
+}
+DateTime get date{
+   var now = DateTime.now();
+  return  now;
+}
+
 }
