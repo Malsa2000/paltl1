@@ -28,7 +28,7 @@ class _ViewProblemState extends State<ViewProblem> with SingleTickerProviderStat
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
-    Provider.of<ProblemProvider>(context, listen: false).readState("pending".tr);
+    Provider.of<ProblemProvider>(context, listen: false).read();
 
   }
   @override
@@ -54,8 +54,6 @@ class _ViewProblemState extends State<ViewProblem> with SingleTickerProviderStat
             onTap: (int index) {
               setState(() {
                 _tabController.index = index;
-                Provider.of<ProblemProvider>(context, listen: false).readState(state[index]);
-
               });
             },
             indicator: BoxDecoration(
@@ -107,9 +105,14 @@ class list_state extends StatelessWidget {
   Widget build(BuildContext context) {
   return  Consumer<ProblemProvider>(
       builder: (context, ProblemProvider value, child) {
+
+        Iterable<Problem> getState = value.Problems.where((element) =>
+        element.state.contains("قيد الانتظار")
+        );
+
         if (value.Problems.isNotEmpty) {
           return ListView.builder(
-            itemCount: value.Problems.length,
+            itemCount: getState.length,
             itemBuilder: (context, index) {
               return Visibility(
                 visible: _tabController.index == 0,
