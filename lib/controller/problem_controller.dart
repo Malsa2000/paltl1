@@ -29,8 +29,8 @@ class ProblemsDbController{
     int countOfUpdatedRows = await database.update(
       Problem.tableName,
       model.toMap(),
-      where: 'id = ?',
-      whereArgs: [model.id],
+      where: 'id = ? AND state =?',
+      whereArgs: [model.id ,model.state],
     );
     return countOfUpdatedRows == 1;
   }
