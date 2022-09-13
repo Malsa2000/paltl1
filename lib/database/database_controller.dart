@@ -31,7 +31,8 @@ class DataController {
             'name TEXT NOT NULL,'
             'mobile TEXT NOT NULL,'
             'password TEXT NOT NULL,'
-            'city TEXT NOT NULL'
+            'identfcation TEXT ,'
+            'telephone TEXT'
             ')');
 
         await database.execute('CREATE TABLE problems ('

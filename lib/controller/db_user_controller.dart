@@ -38,14 +38,18 @@ class DBUserController{
       );
     }
   }
-  //mobile verfcation
+  Future<ProcessResponse> update(User model) async {
+    int countOfUpdatedRows = await _database.update(User.tableName, model.toMap() ,where: 'id =?' ,whereArgs: [model.id]);
+     return ProcessResponse(
+      massage: countOfUpdatedRows ==1 ? 'Update successfully' : 'Register failed!',
+      succsess: countOfUpdatedRows ==1,
+    );
+  }
   Future<bool> _isMobileExist({required String mobile}) async {
     List<Map<String, dynamic>> rowsMap = await _database
-        .rawQuery('SELECT * FROM users WHERE email = ?', [mobile]);
+        .rawQuery('SELECT * FROM users WHERE mobile = ?', [mobile]);
     return rowsMap.isEmpty;
   }
-
-
 
 
 }

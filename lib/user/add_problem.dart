@@ -252,6 +252,7 @@ final imagePicker = ImagePicker();
    }
  }
 
+
  bool checkData(){
    if(_descriptionController.text.isNotEmpty && _cityController.text.isNotEmpty && _titleController.text.isNotEmpty
    ){
@@ -267,7 +268,6 @@ void save(){
   context.snackBar(
       massage: "Add Success!" , error: false);
 }
-
 
  Problem get problem {
    Problem problem = Problem();

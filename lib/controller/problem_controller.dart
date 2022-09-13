@@ -41,4 +41,9 @@ Future<List<Problem>> readState(String State) async{
   return rowsMap.map((rowMap) => Problem.fromMap(rowMap)).toList();
 }
 
+  Future<Problem?> show(int id) async {
+    List<Map<String, dynamic>> rowsMap = await database
+        .query(Problem.tableName, where: 'id = ?', whereArgs: [id]);
+    return rowsMap.isNotEmpty ? Problem.fromMap(rowsMap.first) : null;
+  }
 }

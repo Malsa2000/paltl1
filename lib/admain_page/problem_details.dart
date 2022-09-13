@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:paltl/helper_classs.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../models/state.dart';
 class ProblemDetails extends StatefulWidget {
@@ -12,6 +14,8 @@ class ProblemDetails extends StatefulWidget {
 }
 
 class _ProblemDetailsState extends State<ProblemDetails> {
+
+  String mobileNumber = "0";
 
   int? _id ;
   List<ReportState> _dropMenu = <ReportState>[
@@ -92,7 +96,9 @@ class _ProblemDetailsState extends State<ProblemDetails> {
             context.text(text: "Call Report's Provider", size: 14, color: context.blackColor ,wieght: FontWeight.w400),
             Spacer(),
             InkWell(
-              onTap: (){},
+              onTap: (){
+                mackCall();
+              },
                 child: Image(image: AssetImage("images/call.png") ,height: 21.h, width: 21.w,))
           ],),
           SizedBox(height: 33.h,),
@@ -108,6 +114,11 @@ class _ProblemDetailsState extends State<ProblemDetails> {
 
       ),
     );
+  }
+
+  mackCall()async{
+      launch('tel://$mobileNumber');
+      await FlutterPhoneDirectCaller.callNumber(mobileNumber);
   }
 }
 

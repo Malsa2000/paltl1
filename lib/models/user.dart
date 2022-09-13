@@ -3,7 +3,8 @@ class User{
  late String name;
  late String mobile;
  late String password;
- late String city;
+ late String? userIdntfcation;
+ late String? telephone;
 
 
  User();
@@ -13,7 +14,9 @@ class User{
    name = rowMap['name'];
    mobile = rowMap['mobile'];
    password = rowMap['password'];
-   city = rowMap['city'];
+   userIdntfcation = rowMap['identfcation'];
+   telephone = rowMap['telephone'];
+
  }
 
  Map<String, dynamic> toMap() {
@@ -21,7 +24,9 @@ class User{
    map['name']= name;
    map['mobile']= mobile;
    map['password']= password;
-   map['city']= city;
+   map['identfcation']= userIdntfcation;
+   map['telephone'] =telephone;
+
    return map;
  }
 
